@@ -1,0 +1,66 @@
+@baseUrl = http://localhost:3000
+
+POST {{baseUrl}}/course
+Content-Type: application/json
+
+{
+  "name": "NestJS Fundamentals",
+  "code": "CS101",
+  "instructor": "John Doe",
+  "credits": 3,
+  "description": "Intro to NestJS"
+}
+
+GET {{baseUrl}}/course
+
+GET {{baseUrl}}/course/5
+
+PUT {{baseUrl}}/course/5
+Content-Type: application/json
+
+{
+  "name": "NestJS Advanced",
+  "code": "CS201",
+  "instructor": "Jane Doe",
+  "credits": 4
+}
+
+PATCH {{baseUrl}}/course/5
+Content-Type: application/json
+
+{
+  "name": "NestJS Updated",
+  "credits": 5
+}
+
+DELETE {{baseUrl}}/course/5
+
+POST {{baseUrl}}/course
+Content-Type: application/json
+
+{
+  "name": "",
+  "code": "CS999",
+  "instructor": "John Doe",
+  "credits": 3
+}
+
+POST {{baseUrl}}/course
+Content-Type: application/json
+
+{
+  "name": "Invalid Credits",
+  "code": "CS998",
+  "instructor": "John Doe",
+  "credits": 10
+}
+
+POST {{baseUrl}}/course/5/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="notes.pdf"
+Content-Type: application/pdf
+
+< ./notes.pdf
+--WebAppBoundary--
