@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3000
+
+GET {{baseUrl}}/course
+
+GET {{baseUrl}}/course/5
+
+POST {{baseUrl}}/course
+
+PUT {{baseUrl}}/course/5
+
+PATCH {{baseUrl}}/course/5
+
+DELETE {{baseUrl}}/course/5
