@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:3000
+
+GET {{baseUrl}}/course
+
+GET {{baseUrl}}/course/101
+
+POST {{baseUrl}}/course
+Content-Type: application/json
+
+{
+  "name": "NestJS",
+  "code": "CS301"
+}
+
+GET {{baseUrl}}/enrollment
+
+POST {{baseUrl}}/enrollment
+Content-Type: application/json
+
+{
+  "studentName": "John Doe",
+  "courseId": "101"
+}
+
+POST {{baseUrl}}/notification/send
+Content-Type: application/json
+
+{
+  "studentName": "John Doe",
+  "message": "Welcome!"
+}
+
+POST {{baseUrl}}/notification/check
+Content-Type: application/json
+
+{
+  "studentName": "John Doe",
+  "courseId": "101"
+}
