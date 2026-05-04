@@ -1,6 +1,10 @@
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
+import { StudentContext } from '../contexts/StudentContext'
 
-function SortControls({ sortBy, onSortChange }) {
+function SortControls() {
+  const { sortBy, setSortBy } = useContext(StudentContext)
+
   const sortOptions = [
     { value: 'default', label: 'Default' },
     { value: 'name-asc', label: 'Name (A–Z)' },
@@ -16,7 +20,7 @@ function SortControls({ sortBy, onSortChange }) {
         id="sort-select"
         className="sort-select"
         value={sortBy}
-        onChange={(e) => onSortChange(e.target.value)}
+        onChange={(e) => setSortBy(e.target.value)}
         aria-label="Sort students"
       >
         {sortOptions.map((option) => (
@@ -29,9 +33,6 @@ function SortControls({ sortBy, onSortChange }) {
   )
 }
 
-SortControls.propTypes = {
-  sortBy: PropTypes.string.isRequired,
-  onSortChange: PropTypes.func.isRequired,
-}
+SortControls.propTypes = {}
 
 export default SortControls

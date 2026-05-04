@@ -1,6 +1,10 @@
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
+import { StudentContext } from '../contexts/StudentContext'
 
-function SearchBar({ searchQuery, onSearchChange }) {
+function SearchBar() {
+  const { searchQuery, setSearchQuery } = useContext(StudentContext)
+
   return (
     <div className="search-bar-container">
       <input
@@ -8,14 +12,14 @@ function SearchBar({ searchQuery, onSearchChange }) {
         className="search-bar"
         placeholder="Search by name or major..."
         value={searchQuery}
-        onChange={(e) => onSearchChange(e.target.value)}
+        onChange={(e) => setSearchQuery(e.target.value)}
         aria-label="Search students"
       />
       {searchQuery && (
         <button
           type="button"
           className="search-clear-btn"
-          onClick={() => onSearchChange('')}
+          onClick={() => setSearchQuery('')}
           aria-label="Clear search"
         >
           ✕
@@ -25,9 +29,6 @@ function SearchBar({ searchQuery, onSearchChange }) {
   )
 }
 
-SearchBar.propTypes = {
-  searchQuery: PropTypes.string.isRequired,
-  onSearchChange: PropTypes.func.isRequired,
-}
+SearchBar.propTypes = {}
 
 export default SearchBar
