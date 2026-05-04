@@ -2,11 +2,20 @@ import PropTypes from 'prop-types'
 import CourseTag from './CourseTag'
 import StatBadge from './StatBadge'
 
-function StudentCard({ name, id, avatar, gpa, major, credits, courses }) {
+function StudentCard({ name, id, avatar, avatarUrl, gpa, major, credits, courses, isFavorite, onToggleFavorite }) {
   return (
     <article className="student-card">
       <div className="student-top">
-        <div className="student-avatar" aria-label={`${name} avatar`}>
+        <img 
+          src={avatarUrl} 
+          alt={`${name} avatar`}
+          className="student-avatar"
+          onError={(e) => {
+            e.target.style.display = 'none'
+            e.target.nextElementSibling.style.display = 'flex'
+          }}
+        />
+        <div className="student-avatar fallback-avatar" style={{ display: 'none' }}>
           {avatar}
         </div>
         <div>
@@ -14,6 +23,15 @@ function StudentCard({ name, id, avatar, gpa, major, credits, courses }) {
           <p className="student-id">ID: {id}</p>
           <p className="student-major">{major}</p>
         </div>
+        <button
+          type="button"
+          className={`favorite-btn ${isFavorite ? 'is-favorite' : ''}`}
+          onClick={() => onToggleFavorite(id)}
+          aria-label={isFavorite ? `Remove ${name} from favorites` : `Add ${name} to favorites`}
+          title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+        >
+          {isFavorite ? '★' : '☆'}
+        </button>
       </div>
 
       <div className="stats-row">
@@ -38,6 +56,7 @@ StudentCard.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string.isRequired,
   gpa: PropTypes.number.isRequired,
   major: PropTypes.string.isRequired,
   credits: PropTypes.number.isRequired,
@@ -47,6 +66,8 @@ StudentCard.propTypes = {
       color: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  isFavorite: PropTypes.bool,
+  onToggleFavorite: PropTypes.func,
 }
 
 export default StudentCard
